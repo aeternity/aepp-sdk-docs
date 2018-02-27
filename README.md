@@ -3,7 +3,7 @@
 ## Introduction
 Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with the built in governance allowing its community to direct the growth and development of the blockchain. 
 
-The reference implementation ofÆternity, [https://github.com/aeternity/epoch](Epoch) is implemented in the [https://www.erlang.org/](Erlang) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [#LINKTOCOME](wire protocol) guide, and the [#LINKTOCOME](White Paper). For everyone else, there is directly speaking to Epoch, and the SDKs.
+The reference implementation ofÆternity, [https://github.com/aeternity/epoch](Epoch) is implemented in the [https://www.erlang.org/](Erlang) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [https://github.com/aeternity/protocol](wire protocol) guide and the [https://github.com/aeternity/epoch](Epoch code). For everyone else, there is directly speaking to Epoch, and the SDKs.
 
 Epoch's API is documented in the [https://github.com/aeternity/protocol](Protocol repository).
 
