@@ -3,16 +3,16 @@
 ## Introduction
 Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with the built in governance allowing its community to direct the growth and development of the blockchain. 
 
-The reference implementation ofÆternity, [https://github.com/aeternity/epoch](Epoch) is implemented in the [https://www.erlang.org/](Erlang) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [https://github.com/aeternity/protocol](wire protocol) guide and the [https://github.com/aeternity/epoch](Epoch code). For everyone else, there is directly speaking to Epoch, and the SDKs.
+The reference implementation ofÆternity, [Epoch](https://github.com/aeternity/epoch) is implemented in the [Erlang](https://www.erlang.org/) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [wire protocol](https://github.com/aeternity/protocol) guide and the [Epoch code](https://github.com/aeternity/epoch). For everyone else, there is directly speaking to Epoch, and the SDKs.
 
-Epoch's API is documented in the [https://github.com/aeternity/protocol](Protocol repository).
+Epoch's API is documented in the [Protocol repository](https://github.com/aeternity/protocol).
 
-The SDKs interface to Epoch using the [http://noiseprotocol.org/](Noise protocol). Connections may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [https://github.com/aeternity/aepp-sdk-js](Javascript) and [https://github.com/aeternity/aepp-sdk-python](Python) APIs, with more in the works.
+The SDKs interface to Epoch using the [Noise protocol](http://noiseprotocol.org/). Connections may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [Javascript](https://github.com/aeternity/aepp-sdk-js) and [Python](https://github.com/aeternity/aepp-sdk-python) APIs, with more in the works.
 
 This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [
 
 ## Getting started
-If you wish to track the bleeding edge of Æternity development, the best thing to do is to clone the [https://github.com/aeternity/epoch](github repository) and follow the [http://www.example.com/](Getting started guide). Things may stop working, and from time to time the SDKs will be out of sync with maters, so, every 2 weeks we versions of Epoch and the development tools, synced to each other and relatively stable. Releases of are available [/LINTOCOME](here). Unless you really need the newest features we would generally recommend getting the stable releases.
+If you wish to track the bleeding edge of Æternity development, the best thing to do is to clone the [github repository](https://github.com/aeternity/epoch) and follow the [Getting started guide](https://github.com/aeternity/aepp-sdk-python/blob/master/INSTALL.md). Things may stop working, and from time to time the SDKs will be out of sync with maters, so, every 2 weeks we versions of Epoch and the development tools, synced to each other and relatively stable. Releases of are available [here](here). Unless you really need the newest features we would generally recommend getting the stable releases.
 
 As an introduction to the usage of the SDKs, examples are provided in the `examples/` directories of each SDK. The contents vary but in general we have tried to show the basic usage of each major feature of the blockchain. 
 
@@ -97,5 +97,5 @@ The three are designed to support different use cases, with the ethereum VM exis
 
 Contracts must be compiled before they are uploaded to the blockchain. Epoch will compile contracts, but they can be compiled in other ways too. The compiled bytecode is stored on the chain and executed by the nodes. This execution uses CPU power on the nodes, and so it is paid for, using *gas*. A contract which has run out of gas will no longer be executed. The FLM VM is simple enough that the gas price for a contract can be accurately estimated at compile time; for the other VMs the developer is responsible for working out their own gas budget.
 
-A discussion of the concepts is [https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas](here).
+A discussion of the concepts is [here](https://ethereum.stackexchange.com/questions/3/what-is-meant-by-the-term-gas).
 
