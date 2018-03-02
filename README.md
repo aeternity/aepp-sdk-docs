@@ -88,8 +88,8 @@ Contracts are programs which live on the blockchain and allow users to formalise
 The Æternity blockchain supports three different virtual machines:
 
 - the ethereum VM, modified to not support the KILL instruction, which has proved dangerous in practise.
-- FTWVM, a strongly typed virtual machine which is designed to work with the functional language XXX which supports strong type checking and BLAH
-- FLM, a simple virtual machine, which because it can access Æternity's rich built in types nevertheless allows powerful contracts to be created.
+- FTWVM, a strongly typed virtual machine which is designed to work with the functional language Sophia, which supports strong type checking and rigorous proofs.
+- FLM, a simple virtual machine, which because it can access Æternity's rich built in types nevertheless allows powerful contracts to be created. Due to its simplicity the gas cost (see below) of FLM contracts can be accurately estimated.
 
 The three are designed to support different use cases, with the ethereum VM existing in order to support people moving to Æternity, and the other two offering specific advantages in terms of safety and simplicity.
 
