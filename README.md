@@ -50,7 +50,7 @@ The Æternity naming service related human-readable names to public keys for acc
 
 - A client which wants a name makes a hash of that name, along with a secret number, called the *salt*.
 - The client uses this hash to *pre-claim* the name. At this point, no-one else can see what the name is, but the client can prove that they made the pre-claim.
-- The client then *claims* the name, passing in the salt from before. Now everyone can see how the has in the initial step was arrived at. The name is booked with a TTL, after which it expires. The name can either be associated with an account, or with an oracle, and now the name can be used to whereever an account or oracle address is needed.
+- The client then *claims* the name, passing in the salt from before. Now everyone can see how the hash in the initial step was arrived at. The name is booked with a TTL, after which it expires. The name can either be associated with an account, or with an oracle, and now the name can be used to whereever an account or oracle address is needed.
 - If the client no longer needs or wants the name, it *revokes* the name. After this the name can be claimed by someone else.
 - The client can *transfer* the name to someone else.
 
