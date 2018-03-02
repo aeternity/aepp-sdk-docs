@@ -9,7 +9,7 @@ Epoch's API is documented in the [Protocol repository](https://github.com/aetern
 
 The SDKs interface to Epoch using the [Noise protocol](http://noiseprotocol.org/). Connections may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [Javascript](https://github.com/aeternity/aepp-sdk-js) and [Python](https://github.com/aeternity/aepp-sdk-python) APIs, with more in the works.
 
-This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [
+This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [the Epoch repository](https://github.com/aeternity/epoch).
 
 ## Getting started
 If you wish to track the bleeding edge of Æternity development, the best thing to do is to clone the [github repository](https://github.com/aeternity/epoch) and follow the [Getting started guide](https://github.com/aeternity/aepp-sdk-python/blob/master/INSTALL.md). Things may stop working, and from time to time the SDKs will be out of sync with maters, so, every 2 weeks we versions of Epoch and the development tools, synced to each other and relatively stable. Releases of are available [here](here). Unless you really need the newest features we would generally recommend getting the stable releases.
