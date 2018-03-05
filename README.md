@@ -9,7 +9,7 @@ Epoch's API is documented in the [Protocol repository](https://github.com/aetern
 
 The SDKs interface to Epoch may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [Javascript](https://github.com/aeternity/aepp-sdk-js) and [Python](https://github.com/aeternity/aepp-sdk-python) APIs, with more in the works.
 
-This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [its repository](https://github.com/aeternity/protocol).
+This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [the Epoch repository](https://github.com/aeternity/epoch).
 
 ## Getting started
 If you wish to track the bleeding edge of Æternity development, the best thing to do is to clone the [github repository](https://github.com/aeternity/epoch) and follow the [Getting started guide](https://github.com/aeternity/aepp-sdk-python/blob/master/INSTALL.md). Things may stop working, and from time to time the SDKs will be out of sync with maters, so, every 2 weeks we versions of Epoch and the development tools, synced to each other and relatively stable. Releases of are available [here](here). Unless you really need the newest features we would generally recommend getting the stable releases.
@@ -50,7 +50,7 @@ The Æternity naming service related human-readable names to public keys for acc
 
 - A client which wants a name makes a hash of that name, along with a secret number, called the *salt*.
 - The client uses this hash to *pre-claim* the name. At this point, no-one else can see what the name is, but the client can prove that they made the pre-claim.
-- The client then *claims* the name, passing in the salt from before. Now everyone can see how the has in the initial step was arrived at. The name is booked with a TTL, after which it expires. The name can either be associated with an account, or with an oracle, and now the name can be used to whereever an account or oracle address is needed.
+- The client then *claims* the name, passing in the salt from before. Now everyone can see how the hash in the initial step was arrived at. The name is booked with a TTL, after which it expires. The name can either be associated with an account, or with an oracle, and now the name can be used to whereever an account or oracle address is needed.
 - If the client no longer needs or wants the name, it *revokes* the name. After this the name can be claimed by someone else.
 - The client can *transfer* the name to someone else.
 
