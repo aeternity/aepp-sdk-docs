@@ -3,13 +3,13 @@
 ## Introduction
 Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with the built in governance allowing its community to direct the growth and development of the blockchain. 
 
-The reference implementation ofÆternity, [Epoch](https://github.com/aeternity/epoch) is implemented in the [Erlang](https://www.erlang.org/) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [wire protocol](https://github.com/aeternity/protocol) guide and the [Epoch code](https://github.com/aeternity/epoch). For everyone else, there is directly speaking to Epoch, and the SDKs.
+The reference implementation ofÆternity, [Epoch](https://github.com/aeternity/epoch) is implemented in the [Erlang](https://www.erlang.org/) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [the protocol](https://github.com/aeternity/protocol) guide and the [Epoch code](https://github.com/aeternity/epoch). For everyone else, there is directly speaking to Epoch, and the SDKs.
 
 Epoch's API is documented in the [Protocol repository](https://github.com/aeternity/protocol).
 
-The SDKs interface to Epoch using the [Noise protocol](http://noiseprotocol.org/). Connections may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [Javascript](https://github.com/aeternity/aepp-sdk-js) and [Python](https://github.com/aeternity/aepp-sdk-python) APIs, with more in the works.
+The SDKs interface to Epoch may be either request/response or connection-oriented. The SDKs aim to shield users from these details and provide an idiomatic OO interface. We currently have [Javascript](https://github.com/aeternity/aepp-sdk-js) and [Python](https://github.com/aeternity/aepp-sdk-python) APIs, with more in the works.
 
-This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [
+This document is intended for people using the SDKs we provide. It does not go into detail about what is going on under the hood, rather concentrating on concepts instead. Details and code examples for the different languages are in the SDKs themselves, and Epoch is documented in [its repository](https://github.com/aeternity/protocol).
 
 ## Getting started
 If you wish to track the bleeding edge of Æternity development, the best thing to do is to clone the [github repository](https://github.com/aeternity/epoch) and follow the [Getting started guide](https://github.com/aeternity/aepp-sdk-python/blob/master/INSTALL.md). Things may stop working, and from time to time the SDKs will be out of sync with maters, so, every 2 weeks we versions of Epoch and the development tools, synced to each other and relatively stable. Releases of are available [here](here). Unless you really need the newest features we would generally recommend getting the stable releases.
@@ -41,7 +41,7 @@ Blocks are generated *on average* every X minutes, which slows down the rate at 
 
 We endeavour with the SDK to make this as convenient as possible. For the purpose of brevity, in the rest of this document the 'wait for block' will be omitted.
 
-Block generation is blockchain's heartbeat, and is the only way that on-block entities are aware of the passage of time. Oracles are created with a time-to-live (TTL), after which they expire from the chain. Queries sent to oracles are given a TTL, and a TTL for the response. Block generation, as previously stated, averages to one per X minutes--but there is no guarantee that from one block to the next the interval will be this, or even close to it. For activities which need to occur more rapidly side channels enable behaviour which is closer to interactive.
+Block generation is blockchain's heartbeat, and is the only way that on-block entities are aware of the passage of time. Oracles are created with a time-to-live (TTL), after which they expire from the chain. Queries sent to oracles are given a TTL. Block generation, as previously stated, averages to one per X minutes--but there is no guarantee that from one block to the next the interval will be this, or even close to it. For activities which need to occur more rapidly side channels enable behaviour which is closer to interactive.
 
 Blocks contain proof that a certain set of transactions have been committed to the chain--this is why we wait for a block containing our transaction to be mined before moving on to the next transaction. The process by which this occurs is called *mining* and is outside the scope of this document. For more information on mining please consult the Æternity specification (OR SOMETHING ELSE..LINK?)
 
