@@ -1,4 +1,4 @@
-# Quick guide to getting started developing æpps for the Æternity blockchain.
+# Quick guide to getting started developing æpps for the Æternity blockchain
 
 ## Introduction
 Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with the built in governance allowing its community to direct the growth and development of the blockchain. 
