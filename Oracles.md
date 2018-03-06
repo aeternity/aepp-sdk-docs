@@ -1,3 +1,9 @@
+---
+layout: page
+title: Oracles
+navigation: 7
+---
+
 # Oracles
 
 ## Introduction and concepts
