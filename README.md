@@ -1,7 +1,9 @@
 # Quick guide to getting started developing æpps for the Æternity blockchain
 
 ## Introduction
-Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with the built in governance allowing its community to direct the growth and development of the blockchain. 
+Æternity is a modern blockchain which contains many features, such as naming, oracles, contracts and governance, as first-class members of its universe. Æternity is open-source, with built in governance allowing its community to direct the growth and development of the blockchain.
+
+Apps built for the Æternity blockchain are called æpps.
 
 The reference implementation ofÆternity, [Epoch](https://github.com/aeternity/epoch) is implemented in the [Erlang](https://www.erlang.org/) programming language. SDKs written in Javascript and Python provide interfaces to Epoch. Those wishing to implement their own nodes will want to start by checking out [the protocol](https://github.com/aeternity/protocol) guide and the [Epoch code](https://github.com/aeternity/epoch). For everyone else, there is directly speaking to Epoch, and the SDKs.
 
@@ -27,7 +29,7 @@ Each account on the blockchain is represented by a private and public key pair. 
 If you have an Epoch node then you will have a public/private key generated for you. Wallet software will also do this. Each SDK also has a utility function to generate key pairs. TODO:(MAKE THIS TRUE).
 
 ### Block generation
-As with all blockchains, Æternity's transactions are demarcated by block boundaries. This means that for every action you make, you must wait for the transaction to be written into a block. We provide convenience methods which wait for a block generation event, and ensure that your transaction is now part of the permanent record. There still remains the possibility that the chain you have been working on will be orphaned, when the blockchain forks and the yours is the loser in an election.
+As with all blockchains, Æternity's transactions are demarcated by block boundaries. This means that for every action you make, you must wait for the transaction to be written into a block before moving on and doing something else. We provide convenience methods which wait for a block generation event, and ensure that your transaction is now part of the permanent record. There still remains the possibility that the chain you have been working on will be orphaned, when the blockchain forks and the yours is the loser in an election.
 
 Blocks are generated *on average* every X minutes, which slows down the rate at which you can put transactions through. A typical interaction with the blockchain could look like this:
 
@@ -39,11 +41,13 @@ Blocks are generated *on average* every X minutes, which slows down the rate at 
 - Wait for block
 - Respond
 
-We endeavour with the SDK to make this as convenient as possible. For the purpose of brevity, in the rest of this document the 'wait for block' will be omitted.
+We endeavour with the SDKs to make this as convenient as possible. For the purpose of brevity, in the rest of this document the 'wait for block' will be omitted.
 
-Block generation is blockchain's heartbeat, and is the only way that on-block entities are aware of the passage of time. Oracles are created with a time-to-live (TTL), after which they expire from the chain. Queries sent to oracles are given a TTL. Block generation, as previously stated, averages to one per X minutes--but there is no guarantee that from one block to the next the interval will be this, or even close to it. For activities which need to occur more rapidly side channels enable behaviour which is closer to interactive.
+Block generation is a blockchain's heartbeat, and is the only way that on-block entities are aware of the passage of time. Oracles are created with a time-to-live (TTL), after which they expire from the chain. Queries sent to oracles are given a TTL. Block generation, as previously stated, averages to one per 10 minutes--but there is no guarantee that from one block to the next the interval will be this, or even close to it. For activities which need to occur more rapidly side channels enable behaviour which is closer to interactive.
 
-Blocks contain proof that a certain set of transactions have been committed to the chain--this is why we wait for a block containing our transaction to be mined before moving on to the next transaction. The process by which this occurs is called *mining* and is outside the scope of this document. For more information on mining please consult the Æternity specification (OR SOMETHING ELSE..LINK?)
+Æternity will be implementing BlockchainNG in the near future, which will generate blocks every 10-15 seconds. While we wait for this, our Getting Started guide for developers includes instructions to speed up block generation for your private test network to approximately this speed.
+
+Blocks contain proof that a certain set of transactions have been committed to the chain--this is why we wait for a block containing our transaction to be mined before moving on to the next. The process by which this occurs is called *mining* and is outside the scope of this document. For more information on mining please consult the Æternity specification.
 
 ### Naming Service
 The Æternity naming service related human-readable names to public keys for accounts and oracles. The naming system is designed for the zero-trust blockchain model, specifically in order to prevent malicious nodes from stealing names from clients connected to them. In order to prevent this, the model is:
@@ -75,17 +79,10 @@ Clients can interact with an oracle by their public key, or by name using the AE
 
 If the TTL of the query+response would exceed the oracle's remaining TTL then the query will not be sent.
 
-### Governance
-To come
-
 ###Contracts###
-Contracts are programs which live on the blockchain and allow users to formalise arrangements between them. Virtual machines running on nodes execute the contracts, for which the nodes receive fees. A contract will run when it receives an event from the outside world, which could be
+Contracts are programs which live on the blockchain and allow users to formalise arrangements between them. Virtual machines running on nodes execute the contracts, for which the nodes receive fees. A contract will run when it receives an event from the outside world, which could be payment from a user, or some event from the outside world, delivered via an oracle.
 
-- Payment from a user
-- A result from an Oracle
-- ???
-
-The Æternity blockchain supports three different virtual machines:
+The Æternity blockchain supports three different virtual machines, which contracts run on:
 
 - the ethereum VM, modified to not support the KILL instruction, which has proved dangerous in practise.
 - FTWVM, a strongly typed virtual machine which is designed to work with the functional language Sophia, which supports strong type checking and rigorous proofs.
