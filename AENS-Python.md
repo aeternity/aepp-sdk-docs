@@ -1,3 +1,9 @@
+---
+layout: page
+title: The Æternity Naming System
+navigation: 8
+---
+
 # The Æternity Naming System (AENS)
 
 ## Introduction
