@@ -52,7 +52,7 @@ and which can alter the state of the chain. A contract runs on a virtual
 machine. A smart contract is associated with a virtual machine for the execution
 of that contract. The AEternity blockchain supports four virtual machines.
 
-Source: https://en.wikipedia.org/wiki/Smart_contract
+Source: https://en.wikipedia.org/wiki/Smart_contract  
 Source: https://github.com/aeternity/protocol/blob/master/contracts/contracts.md
 
 Virtual Machine
@@ -79,7 +79,7 @@ The AEternity blockchain supports four virtual machines.
 - AEVM - A version of the Ethereum VM
 - FAEVM - A fast version of the Ethereum VM
 
-Source: https://themerkle.com/what-is-the-ethereum-virtual-machine/
+Source: https://themerkle.com/what-is-the-ethereum-virtual-machine/  
 Source: https://github.com/aeternity/protocol/blob/master/contracts/aevm.md
 
 Oracle
@@ -101,7 +101,7 @@ smart contracts to interface with data from the outside world. Data-feeds from
 individuals or institutions can directly interface with the blockchain and
 provide data for smart contracts.
 
-Source: https://www.ledger.fr/2016/08/31/hardware-pythias-bridging-the-real-world-to-the-blockchain/
+Source: https://www.ledger.fr/2016/08/31/hardware-pythias-bridging-the-real-world-to-the-blockchain/  
 Source: https://en.wikipedia.org/wiki/%C3%86ternity#Decentralized_Oracle
 
 Cuckoo Cycle
@@ -157,7 +157,7 @@ blocks must contain a proof of work to be considered valid. This proof of work
 is verified by other Bitcoin nodes each time they receive a block. Bitcoin uses
 the hashcash proof-of-work function.
 
-Source: https://en.wikipedia.org/wiki/Cryptocurrency#Mining
+Source: https://en.wikipedia.org/wiki/Cryptocurrency#Mining  
 Source: https://www.bitcoinmining.com/
 
 GHOST consensus protocol
@@ -194,7 +194,7 @@ This ledger of past transactions is called the block chain as it is a chain of
 blocks. The block chain serves to confirm transactions to the rest of the
 network as having taken place.
 
-Source: https://en.bitcoin.it/wiki/Block_chain
+Source: https://en.bitcoin.it/wiki/Block_chain  
 Source: https://www.bitcoinmining.com/
 
 Genesis block
@@ -297,7 +297,7 @@ final state is then written to the blockchain. If the end result is disputed,
 the series of signed off-chain transactions can be uploaded to the blockchain
 for verification or dispute resolution
 
-Source: https://github.com/aeternity/aeternity-reimagined/blob/master/state-channels.md
+Source: https://github.com/aeternity/aeternity-reimagined/blob/master/state-channels.md  
 Source: https://en.wikipedia.org/wiki/%C3%86ternity#State_channels
 
 Solidity
@@ -320,7 +320,7 @@ blockchain specific primitives, constructions and types have been added.
 The Functional Typed Warded Virtual Machine is used to efficiently and safely
 execute contracts written in the Sophia language.
 
-Source: https://github.com/aeternity/protocol/blob/master/contracts/sophia.md
+Source: https://github.com/aeternity/protocol/blob/master/contracts/sophia.md  
 Source: https://github.com/aeternity/protocol/blob/master/contracts/aevm.md
 
 ReasonML
