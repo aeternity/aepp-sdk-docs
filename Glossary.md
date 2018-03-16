@@ -5,7 +5,6 @@ navigation: 50
 ---
 
 # æternity glossary
-=================
 
 ## Overview
 
@@ -21,7 +20,7 @@ Real-world data can interface with smart contracts through decentralized
 "oracles". Scalability and trustless Turing-complete state channels set æternity
 apart from other Blockchain 2.0 projects.
 
-Source: https://github.com/aeternity/aeternity-reimagined/blob/master/overview.md
+[Source](https://github.com/aeternity/aeternity-reimagined/blob/master/overview.md)
 
 ## æternity token
 The æternity token (AE) is used as payment for any resources that users consume
@@ -37,7 +36,7 @@ recorder or a high-efficiency Bitcoin miner is an ASIC. Application-specific
 standard products (ASSPs) are intermediate between ASICs and industry standard
 integrated circuits like the 7400 series or the 4000 series.
 
-Source: https://en.wikipedia.org/wiki/Application-specific_integrated_circuit
+[Source](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)
 
 ## Blockchain
 A block chain is a transaction database shared by all nodes participating in a
@@ -50,8 +49,8 @@ This ledger of past transactions is called the block chain as it is a chain of
 blocks. The block chain serves to confirm transactions to the rest of the
 network as having taken place.
 
-Source: https://en.bitcoin.it/wiki/Block_chain  
-Source: https://www.bitcoinmining.com/
+[Source](https://en.bitcoin.it/wiki/Block_chain)
+[Source](https://www.bitcoinmining.com/)
 
 ## Cuckoo Cycle
 æternity uses Cuckoo Cycle as the ASIC-resistant mining algorithm to avoid
@@ -82,13 +81,13 @@ With that modification, it is possible to speed up the blockchain to a velocity
 of up to 1 block per second. The result is a general higher possible transaction
 rate without compromising the blockchain consensus and security.
 
-Source: https://ethereum.stackexchange.com/questions/314/what-is-ghost-and-what-is-its-relationship-to-frontier-and-casper
+[Source](https://ethereum.stackexchange.com/questions/314/what-is-ghost-and-what-is-its-relationship-to-frontier-and-casper
 
 ## Consensus
 When several nodes (usually most nodes on the network) all have the same blocks
 in their locally-validated best block chain.
 
-Source: https://bitcoin.org/en/glossary/consensus
+[Source](https://bitcoin.org/en/glossary/consensus)
 
 ## Faucet (cryptocurrency)
 Bitcoin faucets are a reward system, in the form of a website or app, that
@@ -105,7 +104,7 @@ that utilize its block chain. It is a special case in that it does not reference
 a previous block, and for Bitcoin and almost all of its derivatives, it produces
 an unspendable subsidy.
 
-Source: https://en.bitcoin.it/wiki/Genesis_block
+[Source](https://en.bitcoin.it/wiki/Genesis_block)
 
 ## Hashcash PoW
 Hashcash is a proof-of-work algorithm that requires a selectable amount of work
@@ -157,8 +156,8 @@ blocks must contain a proof of work to be considered valid. This proof of work
 is verified by other Bitcoin nodes each time they receive a block. Bitcoin uses
 the hashcash proof-of-work function.
 
-Source: https://en.wikipedia.org/wiki/Cryptocurrency#Mining  
-Source: https://www.bitcoinmining.com/
+[Source](https://en.wikipedia.org/wiki/Cryptocurrency#Mining)
+[Source](https://www.bitcoinmining.com/)
 
 ## Nonce (cryptography)
 In cryptography, a nonce is an arbitrary number that can only be used once. It
@@ -178,7 +177,7 @@ of useful hashes for later use) that had an arbitrary number of leading zeroes,
 by hashing the same input with a large number of nonce values until a
 "desirable" hash was obtained.
 
-Source: https://en.wikipedia.org/wiki/Cryptographic_nonce
+[Source](https://en.wikipedia.org/wiki/Cryptographic_nonce)
 
 ## Oracle
 Oracles are trusted entities signing claims about the state of the world - RPCs,
@@ -188,9 +187,9 @@ They form the ability to refer to values from real-world data.
 
 An oracle is a mechanism that tells the blockchain facts about the real-world we
 live in (e.g. the weather, the closing price of Apple shares on a particular
-date, sports events, or human deaths). æternity's oracle system[21] uses the
+date, sports events, or human deaths). æternity's oracle system(21) uses the
 same governance mechanism as the æternity blockchain itself, it does not require
-a separate governance layer on top of the æternity main-net [22] (as with Augur
+a separate governance layer on top of the æternity main-net (22) (as with Augur
 on top of Ethereum).
 
 Typed oracles as primitives on the blockchain provide a well-defined way for
@@ -198,8 +197,8 @@ smart contracts to interface with data from the outside world. Data-feeds from
 individuals or institutions can directly interface with the blockchain and
 provide data for smart contracts.
 
-Source: https://www.ledger.fr/2016/08/31/hardware-pythias-bridging-the-real-world-to-the-blockchain/  
-Source: https://en.wikipedia.org/wiki/%C3%86ternity#Decentralized_Oracle
+[Source](https://www.ledger.fr/2016/08/31/hardware-pythias-bridging-the-real-world-to-the-blockchain)
+[Source](https://en.wikipedia.org/wiki/%C3%86ternity#Decentralized_Oracle)
 
 ## Proof-of-stake (PoS)
 Proof of stake (PoS) is a type of algorithm by which a cryptocurrency blockchain
@@ -213,7 +212,7 @@ new blocks.
 Proof-of-stake currencies can be more energy efficient than currencies based on
 proof-of-work algorithms.
 
-Source: https://en.wikipedia.org/wiki/Proof-of-stake
+[Source](https://en.wikipedia.org/wiki/Proof-of-stake)
 
 ## Proof-of-work system (PoW)
 A proof-of-work (PoW) system (or protocol, or function) is an economic measure
@@ -227,13 +226,13 @@ provider. This idea is also known as a CPU cost function, client puzzle,
 computational puzzle or CPU pricing function. It is distinct from a CAPTCHA,
 which is intended for a human to solve quickly, rather than a computer.
 
-Source: https://en.wikipedia.org/wiki/Proof-of-work_system
+[Source](https://en.wikipedia.org/wiki/Proof-of-work_system)
 
 ## ReasonML
 Reason lets you write simple, fast and quality type safe code while leveraging
 both the JavaScript & OCaml ecosystems.
 
-Source: https://reasonml.github.io/
+[Source](https://reasonml.github.io/)
 
 ## Smart Contract
 A smart contract is a computer protocol intended to digitally facilitate,
@@ -265,7 +264,7 @@ and which can alter the state of the chain. A contract runs on a virtual
 machine. A smart contract is associated with a virtual machine for the execution
 of that contract. The AEternity blockchain supports four virtual machines.
 
-Further reading [here](https://en.wikipedia.org/wiki/Smart_contract  ) and [here](https://github.com/aeternity/protocol/blob/master/contracts/contracts.md)
+Further reading (here)(https://en.wikipedia.org/wiki/Smart_contract  ) and (here)(https://github.com/aeternity/protocol/blob/master/contracts/contracts.md)
 
 ## Solution-verification PoW
 Solution-verification protocols do not assume such a link: as a result the
@@ -295,15 +294,15 @@ final state is then written to the blockchain. If the end result is disputed,
 the series of signed off-chain transactions can be uploaded to the blockchain
 for verification or dispute resolution
 
-Source: https://github.com/aeternity/aeternity-reimagined/blob/master/state-channels.md  
-Source: https://en.wikipedia.org/wiki/%C3%86ternity#State_channels
+[Source](https://github.com/aeternity/aeternity-reimagined/blob/master/state-channels.md  
+[Source](https://en.wikipedia.org/wiki/%C3%86ternity#State_channels
 
 ## Solidity
 Solidity is a contract-oriented, high-level language for implementing smart
 contracts. It was influenced by C++, Python and JavaScript and is designed to
 target the Ethereum Virtual Machine (EVM).
 
-Source: https://solidity.readthedocs.io/en/v0.4.20/
+[Source](https://solidity.readthedocs.io/en/v0.4.20/)
 
 ## Sophia (programming language)
 An AEternity BlockChain Language - Sophia is a dialect of ReasonML.
@@ -316,8 +315,8 @@ blockchain specific primitives, constructions and types have been added.
 The Functional Typed Warded Virtual Machine is used to efficiently and safely
 execute contracts written in the Sophia language.
 
-Source: https://github.com/aeternity/protocol/blob/master/contracts/sophia.md  
-Source: https://github.com/aeternity/protocol/blob/master/contracts/aevm.md
+[Source](https://github.com/aeternity/protocol/blob/master/contracts/sophia.md)
+[Source](https://github.com/aeternity/protocol/blob/master/contracts/aevm.md)
 
 ## Virtual Machine
 A virtual machine is a computer program which provides the services usually provided by a computer, but which runs on another computer, which may be of the same type, but as easily may not. Blockchains provide virtual machines in order to enable programs to be run on the blockchain. 
@@ -344,6 +343,6 @@ The AEternity blockchain supports four virtual machines.
 - AEVM - A version of the Ethereum VM
 - FAEVM - A fast version of the Ethereum VM
 
-Source: https://themerkle.com/what-is-the-ethereum-virtual-machine/  
-Source: https://github.com/aeternity/protocol/blob/master/contracts/aevm.md
+[Source](https://themerkle.com/what-is-the-ethereum-virtual-machine/)
+[Source](https://github.com/aeternity/protocol/blob/master/contracts/aevm.md)
 
