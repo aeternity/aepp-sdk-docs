@@ -1,3 +1,9 @@
+---
+layout: page
+title: Sophia Tutorial
+navigation: 10
+---
+
 # Sophia Tutorial
 ## Intro
 Sophia is a new [reason](https://reasonml.github.io) like programming language invented for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sophia.
