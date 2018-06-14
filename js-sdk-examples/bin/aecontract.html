@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Simple Sophia Contract Compiler</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          
+          
+          
+            <div class='highlight'><pre><span class="hljs-meta">#!/usr/bin/env node</span></pre></div>
+          
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="aecontract.html">
+                    bin/aecontract.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aecrypto.html">
+                    bin/aecrypto.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aewallet.html">
+                    bin/aewallet.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <h1 id="simple-sophia-contract-compiler">Simple Sophia Contract Compiler</h1>
+<p>This script demonstrates how to deal with the different phases of compiling
+Sophia contracts to bytecode, deploying the bytecode to get a callable
+contract address and ultimately, invoke the deployed contract on the
+æternity blockchain.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-comment">/*
+ * ISC License (ISC)
+ * Copyright (c) 2018 aeternity developers
+ *
+ *  Permission to use, copy, modify, and/or distribute this software for any
+ *  purpose with or without fee is hereby granted, provided that the above
+ *  copyright notice and this permission notice appear in all copies.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ *  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ *  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ *  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+ *  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+ *  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ *  PERFORMANCE OF THIS SOFTWARE.
+ */</span>
+<span class="hljs-meta">
+'use strict'</span></pre></div>
+        
+      
+        
+        <p>We’ll need the main client module <code>Ae</code>, the <code>Wallet</code> module, the <code>Crypto</code>
+module and the <code>contract</code> module from the SDK.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> { <span class="hljs-attr">default</span>: Ae, Wallet, Contract, Crypto } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aeternity/aepp-sdk'</span>)
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>)
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">exec</span> (<span class="hljs-params">infile, fn, args</span>) </span>{
+  <span class="hljs-keyword">const</span> keypair = Crypto.envKeypair(process.env)
+
+  <span class="hljs-keyword">if</span> (!infile || !fn) {
+    program.outputHelp()
+    process.exit(<span class="hljs-number">1</span>)
+  }
+
+  <span class="hljs-keyword">const</span> code = fs.readFileSync(infile, <span class="hljs-string">'utf-8'</span>)</pre></div>
+        
+      
+        
+        <p>Most methods in the SDK return <em>Promises</em>, so the recommended way of
+dealing with subsequent actions is <code>then</code> chaining with a final <code>catch</code>
+callback.</p>
+
+        
+      
+        
+        <p><code>Ae.create</code> itself is asynchronous as it determines the node’s version and
+rest interface automatically. Only once the Promise is fulfilled, we know
+we have a working client object.<br>Both <code>Wallet.create</code> and <code>Contract.create</code> need to be initialized with
+the Ae client. The Wallet object needs to be passed in because some of
+the following actions requires sending signed transactions to be mined,
+which implies spending reward tokens to the miner.<br><code>compile</code> takes a raw Sophia contract in string form and sends it off to
+the node for bytecode compilation. This might in the future be done
+without talking to the node, but requires a bytecode compiler
+implementation directly in the SDK.</p>
+
+        
+          <div class='highlight'><pre>  Ae.create(program.host, { <span class="hljs-attr">debug</span>: program.debug }).then(<span class="hljs-function"><span class="hljs-params">client</span> =&gt;</span> {
+    <span class="hljs-keyword">return</span> Contract.create(client, Wallet.create(client, keypair)).compile(code)</pre></div>
+        
+      
+        
+        <p>Invoking <code>deploy</code> on the bytecode object will result in the contract
+being written to the chain, once the block has been mined.
+Sophia contracts always have an <code>init</code> method which needs to be invoked,
+even when the contract’s <code>state</code> is <code>unit</code> (<code>()</code>). The arguments to
+<code>init</code> have to be provided at deployment time and will be written to the
+block as well, together with the contract’s bytecode.</p>
+
+        
+          <div class='highlight'><pre>  }).then(<span class="hljs-function"><span class="hljs-params">bytecode</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Obtained bytecode <span class="hljs-subst">${bytecode.bytecode}</span>`</span>)
+    <span class="hljs-keyword">return</span> bytecode.deploy({ <span class="hljs-attr">initState</span>: program.init })</pre></div>
+        
+      
+        
+        <p>Once the contract has been successfully mined, we can attempt to invoke
+any public function defined within it. The miner who found the next block
+will not only be rewarded a fixed amount, but also an amount depending on
+the amount of gas spend.</p>
+
+        
+          <div class='highlight'><pre>  }).then(<span class="hljs-function"><span class="hljs-params">deployed</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Contract deployed at <span class="hljs-subst">${deployed.address}</span>`</span>)
+    <span class="hljs-keyword">return</span> deployed.call(fn, { <span class="hljs-attr">args</span>: args.join(<span class="hljs-string">' '</span>) })</pre></div>
+        
+      
+        
+        <p>The execution result, if successful, will be an AEVM-encoded result
+value. Once type decoding will be implemented in the SDK, this value will
+not be a hexadecimal string, anymore.</p>
+
+        
+          <div class='highlight'><pre>  }).then(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Execution result: <span class="hljs-subst">${value}</span>`</span>)
+  }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(e.message))
+}</pre></div>
+        
+      
+        
+        <h2 id="command-line-interface">Command Line Interface</h2>
+<p>The <code>commander</code> library provides maximum command line parsing convenience.</p>
+
+        
+          <div class='highlight'><pre>program
+  .version(<span class="hljs-string">'0.1.0'</span>)
+  .arguments(<span class="hljs-string">'&lt;infile&gt; &lt;function&gt; [args...]'</span>)
+  .option(<span class="hljs-string">'-i, --init [state]'</span>, <span class="hljs-string">'Arguments to contructor function'</span>)
+  .option(<span class="hljs-string">'-H, --host [hostname]'</span>, <span class="hljs-string">'Node to connect to'</span>, <span class="hljs-string">'http://localhost:3013'</span>)
+  .option(<span class="hljs-string">'--debug'</span>, <span class="hljs-string">'Switch on debugging'</span>)
+  .action(exec)
+  .parse(process.argv)</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

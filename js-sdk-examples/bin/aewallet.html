@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Simple AE Token Spending Script</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          
+          
+          
+            <div class='highlight'><pre><span class="hljs-meta">#!/usr/bin/env node</span></pre></div>
+          
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="aecontract.html">
+                    bin/aecontract.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aecrypto.html">
+                    bin/aecrypto.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aewallet.html">
+                    bin/aewallet.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <h1 id="simple-ae-token-spending-script">Simple AE Token Spending Script</h1>
+<p>This script shows how to use the <code>Wallet</code> module from the SDK to send AE to
+other addresses.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-comment">/*
+ * ISC License (ISC)
+ * Copyright (c) 2018 aeternity developers
+ *
+ *  Permission to use, copy, modify, and/or distribute this software for any
+ *  purpose with or without fee is hereby granted, provided that the above
+ *  copyright notice and this permission notice appear in all copies.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ *  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ *  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ *  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+ *  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+ *  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ *  PERFORMANCE OF THIS SOFTWARE.
+ */</span>
+<span class="hljs-meta">
+'use strict'</span></pre></div>
+        
+      
+        
+        <p>We’ll need the main client module <code>Ae</code>, <code>Wallet</code> module and the <code>Crypto</code>
+module from the SDK.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> { <span class="hljs-attr">default</span>: Ae, Wallet, Crypto } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aeternity/aepp-sdk'</span>)
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">spend</span> (<span class="hljs-params">receiver, amount, { host, debug }</span>) </span>{
+  <span class="hljs-keyword">const</span> keypair = Crypto.envKeypair(process.env)</pre></div>
+        
+      
+        
+        <p>This code is relatively simple: We create the Ae client asynchronously and
+create a Wallet object ad hoc, only to invoke the spend method on it.</p>
+
+        
+          <div class='highlight'><pre>  Ae.create(host, { debug }).then(<span class="hljs-function"><span class="hljs-params">client</span> =&gt;</span> {
+    <span class="hljs-keyword">return</span> Wallet.create(client, keypair).spend(<span class="hljs-built_in">parseInt</span>(amount), receiver)
+  }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(e.message))
+}</pre></div>
+        
+      
+        
+        <h2 id="command-line-interface">Command Line Interface</h2>
+<p>The <code>commander</code> library provides maximum command line parsing convenience.</p>
+
+        
+          <div class='highlight'><pre>program.version(<span class="hljs-string">'0.1.0'</span>)
+
+program
+  .command(<span class="hljs-string">'spend &lt;receiver&gt; &lt;amount&gt;'</span>)
+  .option(<span class="hljs-string">'-H, --host [hostname]'</span>, <span class="hljs-string">'Node to connect to'</span>, <span class="hljs-string">'http://localhost:3013'</span>)
+  .option(<span class="hljs-string">'--debug'</span>, <span class="hljs-string">'Switch on debugging'</span>)
+  .action(spend)
+
+program.parse(process.argv)
+<span class="hljs-keyword">if</span> (program.args.length === <span class="hljs-number">0</span>) program.help()</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

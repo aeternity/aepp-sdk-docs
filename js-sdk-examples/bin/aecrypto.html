@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>æternity Crypto Helper Script</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          
+          
+          
+            <div class='highlight'><pre><span class="hljs-meta">#!/usr/bin/env node</span></pre></div>
+          
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="aecontract.html">
+                    bin/aecontract.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aecrypto.html">
+                    bin/aecrypto.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="aewallet.html">
+                    bin/aewallet.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        <h1 id="-ternity-crypto-helper-script">æternity Crypto Helper Script</h1>
+<p>This script shows how to use the SDK to generate and decrypt æternity
+compliant key pairs, as well as encode and decode transactions.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-comment">/*
+ * ISC License (ISC)
+ * Copyright (c) 2018 aeternity developers
+ *
+ *  Permission to use, copy, modify, and/or distribute this software for any
+ *  purpose with or without fee is hereby granted, provided that the above
+ *  copyright notice and this permission notice appear in all copies.
+ *
+ *  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+ *  REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+ *  AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+ *  INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+ *  LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+ *  OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ *  PERFORMANCE OF THIS SOFTWARE.
+ */</span>
+<span class="hljs-meta">
+'use strict'</span></pre></div>
+        
+      
+        
+        <p>We’ll only load the <code>Crypto</code> module from the SDK to work with keys and
+transactions.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> { Crypto } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'@aeternity/aepp-sdk'</span>)
+<span class="hljs-keyword">const</span> program = <span class="hljs-built_in">require</span>(<span class="hljs-string">'commander'</span>)
+<span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fs'</span>)
+<span class="hljs-keyword">const</span> prompt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'prompt'</span>)
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>)</pre></div>
+        
+      
+        
+        <p>The <code>prompt</code> library provides concealed input of passwords.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-keyword">const</span> promptSchema = {
+  <span class="hljs-attr">properties</span>: {
+    <span class="hljs-attr">password</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span>,
+      <span class="hljs-attr">description</span>: <span class="hljs-string">'Enter your password'</span>,
+      <span class="hljs-attr">hidden</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">required</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">replace</span>: <span class="hljs-string">'*'</span>,
+      <span class="hljs-attr">conform</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+      }
+    }
+  }
+}</pre></div>
+        
+      
+        
+        <h2 id="key-extraction-from-epoch-nodes-">Key Extraction (from Epoch nodes)</h2>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractReadableKeys</span> (<span class="hljs-params">dir, options</span>) </span>{
+  <span class="hljs-keyword">const</span> pwd = options.input
+  prompt.start()
+  prompt.get(promptSchema, (err, { password }) =&gt; {
+    <span class="hljs-keyword">const</span> key = fs.readFileSync(path.join(pwd, dir, <span class="hljs-string">'sign_key'</span>))
+    <span class="hljs-keyword">const</span> pubKey = fs.readFileSync(path.join(pwd, dir, <span class="hljs-string">'sign_key.pub'</span>))
+
+    <span class="hljs-keyword">const</span> decrypted = Crypto.decryptPrivateKey(password, key)
+
+    <span class="hljs-keyword">const</span> privateHex = Buffer.from(decrypted).toString(<span class="hljs-string">'hex'</span>)
+    <span class="hljs-keyword">const</span> decryptedPub = Crypto.decryptPubKey(password, pubKey)
+
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Private key (hex): <span class="hljs-subst">${privateHex}</span>`</span>)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Public key (base check): ak\$<span class="hljs-subst">${Crypto.encodeBase58Check(decryptedPub)}</span>`</span>)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Public key (hex): <span class="hljs-subst">${decryptedPub.toString(<span class="hljs-string">'hex'</span>)}</span>`</span>)
+  })
+}</pre></div>
+        
+      
+        
+        <h2 id="key-pair-generation">Key Pair Generation</h2>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateKeyPair</span> (<span class="hljs-params">name, { output }</span>) </span>{
+  <span class="hljs-keyword">const</span> { pub, priv } = Crypto.generateKeyPair()
+
+  <span class="hljs-keyword">const</span> data = [[path.join(output, name), priv],
+                [path.join(output, <span class="hljs-string">`<span class="hljs-subst">${name}</span>.pub`</span>), pub]]
+
+  data.forEach(<span class="hljs-function">(<span class="hljs-params">[path, data]</span>) =&gt;</span> {
+     fs.writeFileSync(path, data)
+     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Wrote <span class="hljs-subst">${path}</span>`</span>)
+  })
+}</pre></div>
+        
+      
+        
+        <h2 id="transaction-signing">Transaction Signing</h2>
+<p>This function shows how to use a compliant private key to sign an æternity
+transaction and turn it into an RLP-encoded tuple ready for mining</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">signTx</span> (<span class="hljs-params">tx, privKey</span>) </span>{
+  <span class="hljs-keyword">if</span> (!tx.match(<span class="hljs-regexp">/^tx\$.+/</span>)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Not a valid transaction'</span>)
+  }
+
+  <span class="hljs-keyword">const</span> binaryKey = <span class="hljs-function">(<span class="hljs-params">(</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (program.file) {
+      <span class="hljs-keyword">return</span> fs.readFileSync(program.file)
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (privKey) {
+      <span class="hljs-keyword">return</span> Buffer.from(privKey, <span class="hljs-string">'hex'</span>)
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">throw</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Must provide either [privkey] or [file]'</span>)
+    }
+  })()
+
+  <span class="hljs-keyword">const</span> decryptedKey = program.password ? Crypto.decryptKey(program.password, binaryKey) : binaryKey</pre></div>
+        
+      
+        
+        <p>Split the base58Check part of the transaction</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">const</span> base58CheckTx = tx.split(<span class="hljs-string">'$'</span>)[<span class="hljs-number">1</span>]</pre></div>
+        
+      
+        
+        <p>… and sign the binary create_contract transaction</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">const</span> binaryTx = Crypto.decodeBase58Check(base58CheckTx)
+
+  <span class="hljs-keyword">const</span> signature = Crypto.sign(binaryTx, decryptedKey)</pre></div>
+        
+      
+        
+        <p>the signed tx deserializer expects a 4-tuple:
+&lt;tag, version, signatures_array, binary_tx&gt;</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">const</span> unpackedSignedTx = [
+    Buffer.from([<span class="hljs-number">11</span>]),
+    Buffer.from([<span class="hljs-number">1</span>]),
+    [Buffer.from(signature)],
+    binaryTx
+  ]
+
+  <span class="hljs-built_in">console</span>.log(Crypto.encodeTx(unpackedSignedTx))
+}</pre></div>
+        
+      
+        
+        <h2 id="transaction-deserialization">Transaction Deserialization</h2>
+<p>This helper function deserialized the transaction <code>tx</code> and prints the result.</p>
+
+        
+          <div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">unpackTx</span> (<span class="hljs-params">tx</span>) </span>{
+  <span class="hljs-keyword">const</span> deserializedTx = Crypto.deserialize(Crypto.decodeTx(tx))
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(deserializedTx, <span class="hljs-literal">undefined</span>, <span class="hljs-number">2</span>))
+}</pre></div>
+        
+      
+        
+        <h2 id="command-line-interface">Command Line Interface</h2>
+<p>The <code>commander</code> library provides maximum command line parsing convenience.</p>
+
+        
+          <div class='highlight'><pre>program.version(<span class="hljs-string">'0.1.0'</span>)
+
+program
+  .command(<span class="hljs-string">'decrypt &lt;directory&gt;'</span>)
+  .description(<span class="hljs-string">'Decrypts public and private key to readable formats for testing purposes'</span>)
+  .option(<span class="hljs-string">'-i, --input [directory]'</span>, <span class="hljs-string">'Directory where to look for keys'</span>, <span class="hljs-string">'.'</span>)
+  .action(extractReadableKeys)
+
+program
+  .command(<span class="hljs-string">'genkey &lt;keyname&gt;'</span>)
+  .description(<span class="hljs-string">'Generate keypair'</span>)
+  .option(<span class="hljs-string">'-o, --output [directory]'</span>, <span class="hljs-string">'Output directory for the keys'</span>, <span class="hljs-string">'.'</span>)
+  .action(generateKeyPair)
+
+program
+  .command(<span class="hljs-string">'sign &lt;tx&gt; [privkey]'</span>)
+  .option(<span class="hljs-string">'-p, --password [password]'</span>, <span class="hljs-string">'password of the private key'</span>)
+  .option(<span class="hljs-string">'-f, --file [file]'</span>, <span class="hljs-string">'private key file'</span>)
+  .action(signTx)
+
+program
+  .command(<span class="hljs-string">'unpack &lt;tx&gt;'</span>)
+  .action(unpackTx)
+
+program.parse(process.argv)
+<span class="hljs-keyword">if</span> (program.args.length === <span class="hljs-number">0</span>) program.help()</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
