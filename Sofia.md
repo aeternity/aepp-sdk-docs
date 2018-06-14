@@ -47,6 +47,8 @@ Let us look at the various parts of the above program −
 * The function returns value of the expression, which is "Hello World" in this case.
 ### Compile to bytecode
 
+#### Method 1: Calling the node directly
+
 **All examples use the awsome httpie and jq tools.
 Get them here:**
 > https://httpie.org/
@@ -77,8 +79,7 @@ server: Cowboy
 
 ```
 
-(Mark the following as optional/alternative to last step to avoid confusion //Nikita)
-#### Compile using aepps-contracts
+#### Method 2: Compile using aepps-contracts
 Install aepps-contracts from: https://github.com/aeternity/aepp-contracts
 ```
 git clone https://github.com/aeternity/aepp-contracts
