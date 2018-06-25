@@ -364,8 +364,7 @@ without an explicit declaration somewhere above, the type system will give you a
 
 
 ### Map
->TODO compilation error
->Map not yet implemented.
+Note: maps will be implemented in the next release of Epoch
 
 Maps are key: value store mapping key of one type to value of one type.
 ```ocaml
@@ -379,7 +378,6 @@ A value can be looked in a map using its key:
 ```
 accounts['some_string'] //will return some_address
 ```
-> **TODO** How to use `Map` function
 
 ### State
 Sophia does not have arbitrary mutable state, but only a limited form of state associated with each contract instance.
@@ -671,7 +669,6 @@ contract addition =
         x+2
 ```
 
->TODO "Unbound variable event" in above
 
 ### Transactions
 
@@ -739,7 +736,6 @@ type transaction = SpendTx(spend_tx)
 ### Variants Types
 [Source](http://reasonmlhub.com/exploring-reasonml/ch_variants.html)
 [Source2](https://reasonml.github.io/docs/en/variant.html)
-> TODO how to use variants?
 Variants let you define sets of symbols. When used like this, they are similar to enums in C-style languages. For example, the following type color defines symbols for six colors.
 
 `type color = Red | Orange | Yellow | Green | Blue | Purple`
@@ -900,7 +896,6 @@ let reply =
   
 ```
 
-> TODO `|` giving compilation error inside switch pattern
 
 Combined with other data structures, pattern matching can produce extremely concise, compiler-verified, performant code:
 
