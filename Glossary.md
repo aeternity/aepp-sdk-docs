@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Glossary
-navigation: 50
 ---
 
 # æternity glossary

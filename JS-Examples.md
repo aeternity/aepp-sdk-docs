@@ -1,7 +1,6 @@
 ---
 layout: page
 title: JavaScript SDK Examples
-navigation: 6
 ---
 
 # Examples

@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Sophia Tutorial
-navigation: 10
 ---
 
 # Sophia Tutorial
