@@ -40,7 +40,7 @@ save it as `hello_world.aes`
 
 Let us look at the various parts of the above program −
 * `contract` keyword is used for defining a contract, and `MyContract` is the name of the contract. Contracts are similar to classes in object oriented languages and support local state and inheritance.
-* The next line is indented more than previous to include it in same block. Sofia uses indentation group statements in a block. Further details can be found in section 'Layout blocks'.
+* The next line is indented more than previous to include it in same block. Sophia uses indentation group statements in a block. Further details can be found in section 'Layout blocks'.
 * `public` keyword before a function or type signifies that it can be called from outside of the contract
 * function is declared using `function` keyword, `hello_world` is the name of the function, `()` shows that function takes no argument.
 * The function returns value of the expression, which is "Hello World" in this case.
