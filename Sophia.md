@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Sophia Tutorial
+title: Sofia Tutorial
 ---
 
-# Sophia Tutorial
+# Sofia Tutorial
 ## Intro
-Sophia is a new [reason](https://reasonml.github.io) like programming language invented for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sophia.
+Sofia is a new [reason](https://reasonml.github.io) like programming language invented for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sofia.
 
 ### What is a blockchain?
 A distributed database without a central authority. Most blockchains implement a native token that functions a currency to pay for transactions and store data.
@@ -19,9 +19,9 @@ You can write applications that run on the blockchain. This applications can sto
 
 ### What is the differance to Solidity?
 Solidity is probably the most popular smart contract language originally written for the EVM (ethereum virtual machine). 
-Solidity's syntax is inspired by JavaScript. Sophia's syntax is derived from (OCaml/ReasonML).
+Solidity's syntax is inspired by JavaScript. Sofia's syntax is derived from (OCaml/ReasonML).
 
-### Features of Sophia:
+### Features of Sofia:
 - member of the ML language family
 - strongly typed
 - restricted mutable state
@@ -30,7 +30,7 @@ Solidity's syntax is inspired by JavaScript. Sophia's syntax is derived from (OC
 - Events
 
 ## Hello World
-Let's write a simple Hello World contract in Sophia and compile it to AEVM bytecode.
+Let's write a simple Hello World contract in Sofia and compile it to AEVM bytecode.
 ### hello_world.aes
 ```ocaml
 contract MyContract =
@@ -40,7 +40,7 @@ save it as `hello_world.aes`
 
 Let us look at the various parts of the above program −
 * `contract` keyword is used for defining a contract, and `MyContract` is the name of the contract. Contracts are similar to classes in object oriented languages and support local state and inheritance.
-* The next line is indented more than previous to include it in same block. Sophia uses indentation group statements in a block. Further details can be found in section 'Layout blocks'.
+* The next line is indented more than previous to include it in same block. Sofia uses indentation group statements in a block. Further details can be found in section 'Layout blocks'.
 * `public` keyword before a function or type signifies that it can be called from outside of the contract
 * function is declared using `function` keyword, `hello_world` is the name of the function, `()` shows that function takes no argument.
 * The function returns value of the expression, which is "Hello World" in this case.
@@ -53,7 +53,7 @@ Get them here:**
 > https://httpie.org/
 > https://stedolan.github.io/jq/
 
-You can compile the Sophia source code with the compiler built in the aeternity epoch node.
+You can compile the Sofia source code with the compiler built in the aeternity epoch node.
 
 Make sure you have access to a running epoch node.
 Follow the instructions in the following link to get your personal node up and running.
@@ -89,11 +89,11 @@ npm run
 The utility can be opened in browser. Paste source code and click compile.
 
 ### Test function call
-Now that you successfully compiled your first Sophia smart contract to AEVM bytecode
+Now that you successfully compiled your first Sofia smart contract to AEVM bytecode
 ### 
 ## Other sample contracts
 There is a ever growing list of sample contracts
-https://github.com/aeternity/epoch/tree/master/apps/aesophia/test/contracts
+https://github.com/aeternity/epoch/tree/master/apps/aesofia/test/contracts
 
 ## Basic Language Features
 ### Comments
@@ -103,7 +103,7 @@ and `*/` and can be nested.
 
 ### Layout blocks
 
-Sophia uses Python-style layout rules to group declarations and statements. A
+Sofia uses Python-style layout rules to group declarations and statements. A
 layout block with more than one element must start on a separate line and be
 indented more than the currently enclosing layout block. Blocks with a single
 element can be written on the same line as the previous token.
@@ -121,7 +121,7 @@ contract Layout =
 ```
 
 ### Types & Literals
-Sophia has the following types:
+Sofia has the following types:
 
 | Type    | Description                     | Example
 | ------- | ------------------------------- | -------:
@@ -174,7 +174,7 @@ This let-binding doesn't contain any written type:
 let score = 10
 ```
 
-Sophia knows that score is an int, judging by the value 10. This is called inference.
+Sofia knows that score is an int, judging by the value 10. This is called inference.
 
 But types can also be explicitly written down by choice:
 
@@ -379,7 +379,7 @@ accounts['some_string'] //will return some_address
 ```
 
 ### State
-Sophia does not have arbitrary mutable state, but only a limited form of state associated with each contract instance.
+Sofia does not have arbitrary mutable state, but only a limited form of state associated with each contract instance.
 - Each contract defines a type state encapsulating its mutable state.
 ```ocaml
 type state = { contributions : map(address, int),
@@ -420,7 +420,7 @@ contract Counter =
     function get()           = state.value
     stateful function tick() = put(state{ value = state.value + 1 })
 ```
-### Types not in Sophia
+### Types not in Sofia
 - Arrays
 - References
 - Objects
@@ -553,7 +553,7 @@ function balance_required(current_balance, required_balance) =
     if(current_balance < required_balance) 
         abort("balance not sufficient")
 ```
-## Sophia and the Blockchain
+## Sofia and the Blockchain
 ### Contract primitives
 
 The block-chain environment available to a contract is defined in three name spaces
@@ -641,7 +641,7 @@ contract Environment =
 ### Events
 
 An append only list of blockchain events (or log entries).
-Sophia contracts log structured messages to an event log in the resulting blockchain transaction. To use events a contract must declare a type event, and events are then logged using the event function:
+Sofia contracts log structured messages to an event log in the resulting blockchain transaction. To use events a contract must declare a type event, and events are then logged using the event function:
 
 `event(e : event) : ()`
 
@@ -671,7 +671,7 @@ contract addition =
 
 ### Transactions
 
-Sophia can generate blockchain transactions.
+Sofia can generate blockchain transactions.
 
 
 #### Calling a contract function from outside of contract
@@ -730,7 +730,7 @@ type transaction = SpendTx(spend_tx)
                  | ...
 ```
 
-## Functional Programming Concepts in Sophia
+## Functional Programming Concepts in Sofia
 
 ### Variants Types
 [Source](http://reasonmlhub.com/exploring-reasonml/ch_variants.html)
@@ -797,7 +797,7 @@ It is a variant exposed by default
 ```
 type option('a) = None | Some('a)
 ```
-This is the convention used to simulate a "nullable" (aka undefined or null) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An int will always be an int
+This is the convention used to simulate a "nullable" (aka undefined or null) value in other languages. Thanks to this convenience type definition, Sofia can default every value to be non-nullable. An int will always be an int
 
 ### Destructuring
 [Source](https://reasonml.github.io/docs/en/destructuring.html)
@@ -888,7 +888,7 @@ You can even switch on string, int and others. You can even have many patterns g
 ```ocaml
 let reply =
   switch (message) 
-      "Sophia's pretty cool" => "Yep"
+      "Sofia's pretty cool" => "Yep"
       "good night" => "See ya!"
       "hello" | "hi" | "heya" | "hey" => "hello to you too!"
       _ => "Nice to meet you!"
