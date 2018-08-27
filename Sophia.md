@@ -3,6 +3,7 @@ layout: page
 title: Sophia Tutorial
 redirect_from: "/Sofia.html
 redirect_from: "/Sofia.md"
+redirect_from: "/aepp-sdk-docs/Sofia.html"
 ---
 
 # Sophia Tutorial
