@@ -96,7 +96,7 @@ Now that you successfully compiled your first Sophia smart contract to AEVM byte
 ### 
 ## Other sample contracts
 There is a ever growing list of sample contracts
-https://github.com/aeternity/epoch/tree/master/apps/aeSophia/test/contracts
+https://github.com/aeternity/epoch/tree/master/apps/aesophia/test/contracts
 
 ## Basic Language Features
 ### Comments
