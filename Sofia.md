@@ -8,7 +8,7 @@ redirect_from: "/aepp-sdk-docs/Sofia.html"
 
 # Sophia Tutorial
 ## Intro
-Sophia is a new [reason](https://reasonml.github.io) like programming language invented for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sophia.
+Sophia is a new [reason](https://reasonml.github.io) like programming language created for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sophia.
 
 ### What is a blockchain?
 A distributed database without a central authority. Most blockchains implement a native token that functions a currency to pay for transactions and store data.
@@ -20,9 +20,9 @@ Contracts are similar to classes in object oriented languages and support local 
 ### What can I do with a smart contract?
 You can write applications that run on the blockchain. This applications can store data, manage and transact funds and pretty much any other computaional tasks like 'normal' applications. The main difference is that smart contracts can not be shut down. They will definitely run according to thair code for as long as the blockchain exists. A smart contract does not require a central server to run.
 
-### What is the differance to Solidity?
-Solidity is probably the most popular smart contract language originally written for the EVM (ethereum virtual machine). 
-Solidity's syntax is inspired by JavaScript. Sophia's syntax is derived from (OCaml/ReasonML).
+### How is Sophia different to Solidity?
+Solidity is probably the most popular smart contract language, originally written for the EVM (ethereum virtual machine). 
+Solidity's syntax is inspired by JavaScript. Sophia's syntax is derived from (OCaml/ReasonML). Solidity belongs to the imperative language paradigm, Sophia to the functional.
 
 ### Features of Sophia:
 - member of the ML language family
@@ -1150,6 +1150,11 @@ contract DutchAuction =
     put(state{sold = true})
 
 ```
+
+## Other resources
+
+You can find a good set of example Sophia contracts in the Epoch source tree, at https://github.com/aeternity/epoch/tree/master/apps/aesophia/test/contracts
+
 
 ## Licenses
 
