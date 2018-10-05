@@ -81,7 +81,7 @@ let score = 10
 let newScore = 10 + score
 let condition = false
 ```
-Bindings are immutable--when you have assigned a value to a variable, you may only assign a different value to the variable if you have declared the value as mutable. However you may create a new let binding, which will replace the previous one:
+Bindings are immutable--when you have assigned a value to a variable, you may not assign a new value to that variable. However you may create a new let binding, which will replace the previous one:
 
 ```
 let message = "Hello" // message has value "Hello"
@@ -107,7 +107,6 @@ Types can accept parameters, which are indicated by a leading `'`. Parameterised
 ##### before
 ```
 type intCoordinates = (int, int, int);
-type floatCoordinates = (float, float, float);
 
 let buddy: intCoordinates = (10, 20, 20);
 ```
@@ -117,11 +116,7 @@ type coordinates('a) = ('a, 'a, 'a)
 ```
 now you can instantiate the `coordinates` type by giving its type argument
 ```
-let buddy: coordinates(float) = (10,20,30)
-```
-type inference means that you can omit the type argument, where it is obvious to the compiler:
-```
-let buddy: coordinates = (10.0, 20.0, 30.0)
+let buddy: coordinates(int) = (10,20,30)
 ```
 
 ### Boolean
