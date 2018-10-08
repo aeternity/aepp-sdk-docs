@@ -156,7 +156,7 @@ let newScore = 10 + score
 let condition = false
 ```
 ##### Bindings Are Immutable
-"Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else (unless it explicitly contains a mutable value, discussed later). However, you may create a new binding of the same name which shadows the previous binding; from that point onward, the binding will refer to the newly assigned value.
+"Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else. However, you may create a new binding of the same name which shadows the previous binding; from that point onward, the binding will refer to the newly assigned value.
 
 ```ocaml
 let message = "hello"
@@ -167,9 +167,6 @@ message = "hola"
 //shows error
 ```
 #### Type annotations
-[Source](https://reasonml.github.io/docs/en/type.html)
-[Source 2](https://reasonml.github.io/docs/en/more-on-type.html)
-
 
 This let-binding doesn't contain any written type:
 
@@ -248,7 +245,6 @@ A boolean has the type bool and can be either true or false. Common operations:
 - `bsl` : Shift Left
 
 ### List
-[Source](https://reasonml.github.io/docs/en/list-and-array.html)
 
 Lists are:
 
@@ -284,7 +280,6 @@ Lists, along with recursion, pattern-matching are used extensively in functional
 Explained in 'pattern matching' section.
 
 ### Tuple
-[Source](https://reasonml.github.io/docs/en/tuple.html)
 
 Tuples are
 - immutable
@@ -320,7 +315,6 @@ let (_, y, _) = my3dCoordinates /* now you've retrieved y */
 `_` is used in place of values which we do not want to retrieve/use.
 
 ### Record
-[Source](https://reasonml.github.io/docs/en/record.html)
 Records are like JavaScript objects but are
 
 - lighter
@@ -489,7 +483,6 @@ switch (x : int)
 
 ### Functions
 
-[Source](https://reasonml.github.io/docs/en/function.html)
 Function can be be of type: `public`, `internal` or `private`
 - public:  These can be used from outside the contract.
 - internal: These can be used by contracts inheriting the given contract.
@@ -736,8 +729,6 @@ type transaction = SpendTx(spend_tx)
 ## Functional Programming Concepts in Sophia
 
 ### Variants Types
-[Source](http://reasonmlhub.com/exploring-reasonml/ch_variants.html)
-[Source2](https://reasonml.github.io/docs/en/variant.html)
 Variants let you define sets of symbols. When used like this, they are similar to enums in C-style languages. For example, the following type color defines symbols for six colors.
 
 `type color = Red | Orange | Yellow | Green | Blue | Purple`
@@ -803,7 +794,6 @@ type option('a) = None | Some('a)
 This is the convention used to simulate a "nullable" (aka undefined or null) value in other languages. Thanks to this convenience type definition, Sophia can default every value to be non-nullable. An int will always be an int
 
 ### Destructuring
-[Source](https://reasonml.github.io/docs/en/destructuring.html)
 "Destructuring" is a visually concise way of extracting fields from a data structure. You can use destructuring anywhere you'd normally use a variable.
 
 Usage:
@@ -853,8 +843,6 @@ let otherFunction = (~person as {name} as thePerson) => {
 ```
 
 ### Pattern-matching
-[Source](http://reasonmlhub.com/exploring-reasonml/ch_pattern-matching.html)
-[Source 2](https://reasonml.github.io/docs/en/pattern-matching.html)
 It's like destructuring, but comes with even more help from the type system.
 
 Consider a variant:
