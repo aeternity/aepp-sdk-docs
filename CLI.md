@@ -27,7 +27,7 @@ Available Commands:
   help        Help about any command
   inspect     Inspect an object of the blockchain
   name        A brief description of your command
-  wallet      Interact with a wallet
+  account    Interact with an account
 
 Flags:
   -c, --config string   config file to load (defaults to $HOME/.aeternity/config.yaml
@@ -45,7 +45,7 @@ The general groupings of commands are:
 - `help` does what one would expect and is described here no further.
 - `inspect` allows you to look at the objects on the blockchain
 - `name` allows interaction with the naming system
-- `wallet` commands cover a set of functions which operate with a keypair, from transferring tokens to registering names to invoking smart contracts.
+- `account` commands cover a set of functions which operate with a keypair, from transferring tokens to registering names to invoking smart contracts.
 
 ## The chain group
 
@@ -111,8 +111,8 @@ Version___________________________________________ 23
     SenderID______________________________________ ak_2a1j2Mk9YSmC1gioUq4PWRm3bsv887MbuRVwyv4KaUGoR1eiKi
     TTL___________________________________________ 1182
 ```
-## Wallet commands
-The wallet commands are those which create and report on key pairs, and all of the operations which require payment:
+## Account commands
+The account commands are those which create and report on key pairs, and all of the operations which require payment:
 
 
 
