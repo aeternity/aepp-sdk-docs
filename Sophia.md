@@ -125,7 +125,7 @@ A boolean has the type bool and can be either true or false. Common operations:
 `&&`: logical and
 `||`: logical or
 `!`: logical not.
-`<=`, `>=`, `<`, `>`
+`=<`, `>=`, `<`, `>`, '!='
 `==`: equal, compares data structures deeply: (1, 2) == (1, 2) is true.
 
 #### Bitwise operators
