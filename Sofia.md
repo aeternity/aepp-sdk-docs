@@ -1,120 +1,51 @@
----
-layout: page
-title: Sophia Tutorial
-redirect_from: "/Sofia.html
-redirect_from: "/Sofia.md"
-redirect_from: "/aepp-sdk-docs/Sofia.html"
----
+#Sophia Introduction and tutorial
 
-# Sophia Tutorial
 ## Intro
-Sophia is a new [reason](https://reasonml.github.io) like programming language created for the æternity virtual machine. Developers write smart contracts that run on the æternity blockchain in Sophia.
-
-### What is a blockchain?
-A distributed database without a central authority. Most blockchains implement a native token that functions a currency to pay for transactions and store data.
+Sophia is a new programming language which has been created for writing smart contracts which run on the æternity virtual machine and the ethereum virtual machine. It is in the same family as languages such as [reason](https://reasonml.github.io/), which makes it a functional language (on which more later).
 
 ### What is a smart contract?
-A smart contract is a piece of code that lives on the blockchain. It holds data in its state and can perform mutations through its functions. State data and contract code is stored on the blockchain. Publication of a contract can not be reveresd. Once a contract is published the state can only be changed according to the contract code.
-Contracts are similar to classes in object oriented languages and support local state and inheritance.
+A smart contract is a piece of code that lives on the blockchain. It holds data in its state and can perform mutations through its functions. State data and contract code is stored on the blockchain. Publication of a contract can not be reveresd. Once a contract is published the state can only be changed according to the contract code. Contracts are similar to classes in object oriented languages and support local state and inheritance.
 
 ### What can I do with a smart contract?
-You can write applications that run on the blockchain. This applications can store data, manage and transact funds and pretty much any other computaional tasks like 'normal' applications. The main difference is that smart contracts can not be shut down. They will definitely run according to thair code for as long as the blockchain exists. A smart contract does not require a central server to run.
+You can write applications that run on the blockchain. These applications can store data, manage and transact funds, create oracles, register names, and pretty much any other computaional tasks like ‘normal’ applications. By using oracles, smart contracts can get data from the outside world, and so they can be used just like normal contracts, to formalise agreements between 2 or more parties.
 
-### How is Sophia different to Solidity?
-Solidity is probably the most popular smart contract language, originally written for the EVM (ethereum virtual machine). 
-Solidity's syntax is inspired by JavaScript. Sophia's syntax is derived from (OCaml/ReasonML). Solidity belongs to the imperative language paradigm, Sophia to the functional.
-
-### Features of Sophia:
-- member of the ML language family
-- strongly typed
-- restricted mutable state
-- pattern matching
-- algebraic data types
-- Events
+### How is Sophia different from Solidity?
+Sophia is a functional language, based on ReasonML, and Solidity is an imperative language, based on Javascript. Although you can do the same things in both languages there are important differences:
+- Sophia's functional basis should, all other things being equal, make it easier to write correct, well-structure code.
+- æternity's features, such as oracles, names and state channels are supported natively in Sophia, which not only makes them more natural to use, but will translate to a lower gas price, hence price of execution.
 
 ## Hello World
-Let's write a simple Hello World contract in Sophia and compile it to AEVM bytecode.
+As always, let's start by writing a Hello World contract, and compiling it. 
+
 ### hello_world.aes
-```ocaml
+```
 contract MyContract =
   public function hello_world () = "Hello World"
-```
-save it as `hello_world.aes`
-
-Let us look at the various parts of the above program −
-* `contract` keyword is used for defining a contract, and `MyContract` is the name of the contract. Contracts are similar to classes in object oriented languages and support local state and inheritance.
-* The next line is indented more than previous to include it in same block. Sophia uses indentation group statements in a block. Further details can be found in section 'Layout blocks'.
-* `public` keyword before a function or type signifies that it can be called from outside of the contract
-* function is declared using `function` keyword, `hello_world` is the name of the function, `()` shows that function takes no argument.
-* The function returns value of the expression, which is "Hello World" in this case.
-### Compile to bytecode
-
-#### Method 1: Calling the node directly
-
-**All examples use the awsome httpie and jq tools.
-Get them here:**
-> https://httpie.org/
-> https://stedolan.github.io/jq/
-
-You can compile the Sophia source code with the compiler built in the aeternity epoch node.
-
-Make sure you have access to a running epoch node.
-Follow the instructions in the following link to get your personal node up and running.
-> https://github.com/aeternity/epoch/blob/master/docs/installation.md
-
-Let's send the source to the compile endpoint of the epoch external http api. 
-```
-$ http -j post https://sdk-testnet.aepps.com/v2/contract/compile code=@./hello_world.aes options=''
-```
-
-This should return some compiled bytecode for you.
-```
-HTTP/1.1 200 OK
-content-length: 903
-content-type: application/json
-date: Thu, 17 May 2018 12:57:37 GMT
-server: Cowboy
-
-{
-    "bytecode": "0x3660006020376200005e620000326020518080518051600414620000a457505b518051600b146200010157505b60011951005b805903906000518059600081529081818162000054915b805081590391505090565b8352505060005250f35b8059039060008052f35b5990565b506200014d7f48656c6c6f20576f726c640000000000000000000000000000000000000000005960200190815260209003600b815290565b602001517f696e69740000000000000000000000000000000000000000000000000000000014620000d5576200001f565b50829150620000e362000068565b596000815290818181620000f79162000049565b835250505b905090565b602001517f68656c6c6f5f776f726c640000000000000000000000000000000000000000001462000132576200002c565b59506000516200006c9080518082620001ab91600091505090565b5960008152908181816200018391805180599081528260200182858303935093509350505b600082136200018d57809250505090565b83525050620000fc565b82518059908152506020840160208403839350935093505062000172565b915050806000525959905090509056"
-}
 
 ```
+### the anatomy of the hello world contract
+- the contract starts with the keyword `contract`, followed by the name of the contract, in this case `MyContract`. 
+- contracts are similar to classes in OO programming, in the sense that they can be inherited from, and contain local state
+- the indentation of the next line indicates that it starts a new block
+- the `public` keyword before the `hello_world` indicates that it can be called from outside the contract
+- the `function` keyword starts the function definition, and the empty parantheses `()` that it takes no parameters
+- the return value of the function is always the literal `"Hello World"`
 
-#### Method 2: Compile using aepps-contracts
-Install aepps-contracts from: https://github.com/aeternity/aepp-contracts
-```
-git clone https://github.com/aeternity/aepp-contracts
-cd aepp-contracts
-npm install
-npm run
-```
-The utility can be opened in browser. Paste source code and click compile.
+### Compiling and deploying
+To compile the contract, go to the contract editor at https://contracts.aepps.com and replace the code in the editor window with the example code. Clicking 'Compile' will cause a new UI component, headed with 'Byte Code' to appear. This shows the compiled result. At this stage nothing has been posted to the blockchain--to do this click 'Deploy' at the bottom of the screen. 
 
-### Test function call
-Now that you successfully compiled your first Sophia smart contract to AEVM bytecode
-### 
-## Other sample contracts
-There is a ever growing list of sample contracts
-https://github.com/aeternity/epoch/tree/master/apps/aeSophia/test/contracts
+The deploy stage requires a Keyblock to be mined--this is explained in the BitcoinNG section of https://dev.aepps.com. At this stage what's important to know is that you may have to wait up to 3 minutes until you can call your contract. The contracts editor deals with this for you, and will block until the Keyblock containing your transaction has been mined.
 
-## Basic Language Features
+## Basic language features
 ### Comments
+Single-line comments start with `//` and block comments start with `/*` and end with `*/`. Comments can be nested.
 
-Single line comments start with `//` and block comments are enclosed in `/*`
-and `*/` and can be nested.
+### Blocks
+Sophia uses blocks demarcated by indentation, in the python style. A block with more than one element must start on a new line, and be indented further than the block which encloses it. Blocks with only a single element can be written on the same line as the previous statement.
 
-### Layout blocks
+Each element of the block must share the same indentation, and no part may be less indented than the indentation of the block. 
 
-Sophia uses Python-style layout rules to group declarations and statements. A
-layout block with more than one element must start on a separate line and be
-indented more than the currently enclosing layout block. Blocks with a single
-element can be written on the same line as the previous token.
-
-Each element of the block must share the same indentation and no part of an
-element may be indented less than the indentation of the block. For instance
-
-```ocaml
+```
 contract Layout =
   function foo() = 0  // no layout
   function bar() =    // layout block starts on next line
@@ -123,8 +54,7 @@ contract Layout =
      + 1              // the '+' is indented more than the 'x'
 ```
 
-### Types & Literals
-Sophia has the following types:
+### Types and literals
 
 | Type    | Description                     | Example
 | ------- | ------------------------------- | -------:
@@ -140,93 +70,54 @@ Sophia has the following types:
 | transactions | An append only list of blockchain transactions |
 | events   | An append only list of blockchain events (or log entries) |
 
-### Let  binding and Type annotations
-#### let bindings
+### Assignment (let binding), and types 
 
-A "let binding", in other languages, might be called a "variable declaration/assignment". let gives names to values. They can be seen and referenced by code that comes after them.
-##### Syntax:
-```ocaml
-let varName = expression 
+#### Let bidings
+A let binding assigns a value to a named variable. These can be seen and referenced by code following them. They have this form:
+
 ```
-Examples:
-```ocaml
-let greeting = "hello!"
+let greeting = "Hello"
 let score = 10
 let newScore = 10 + score
 let condition = false
 ```
-##### Bindings Are Immutable
-"Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else. However, you may create a new binding of the same name which shadows the previous binding; from that point onward, the binding will refer to the newly assigned value.
+Bindings are immutable--when you have assigned a value to a variable, you may not assign a new value to that variable. However you may create a new let binding, which will replace the previous one:
 
-```ocaml
-let message = "hello"
-//message has value hello
-let message = "bye"
-//message has value bye
-message = "hola"
-//shows error
 ```
-#### Type annotations
-
-This let-binding doesn't contain any written type:
-
-```ocaml
-let score = 10
+let message = "Hello" // message has value "Hello"
+let message = "Bye" // message has value "Bye"
+message = "Hola" // Error
 ```
 
-Sophia knows that score is an int, judging by the value 10. This is called inference.
+#### Type annotations and inference
+You may have noticed in the previous examples that we haven't given types for the variables. Sophia will infer the value where this makes sense. However sometimes you may want to tell the compiler what the type is, which you do using this syntax
 
-But types can also be explicitly written down by choice:
-
-```ocaml
+```
 let score: int = 10
 ```
-
-You can also wrap any expression in parentheses and annotate it:
-```ocaml
-let myInt = 5
-let myInt: int = 5
-let myInt = (5: int) + (4: int)
-let add = (x: int, y: int) : int => x + y
-// Here add is a function which takes two int as input and returns an int
-// More on function declarations later.
+you can give a type annotation anywhere you introduce a literal or a variable
+```
+let myInt = (5: int) + (10: int)
+let add = (x: int, y: int) : int => x + y  // this is a function definition 
 ```
 
-Declaring types is occasionally necessary with more complicated types, but redundant with simple types.
+You will only normally declare types with more complicated code.
 
-Types can accept parameters, akin to generics in other languages. It's as if a type is a function that takes in arguments and returns a new type! The parameters need to start with a `'` sign (single quotation mark).
-
-The use-case of a parameterized type is to kill duplications. Before:
-
-```ocaml
-/* this is a tuple of 3 items, explained next */
+Types can accept parameters, which are indicated by a leading `'`. Parameterised types are useful when you want to avoid duplication, like this
+##### before
+```
 type intCoordinates = (int, int, int);
-type floatCoordinates = (float, float, float);
 
 let buddy: intCoordinates = (10, 20, 20);
 ```
-
-After:
-
+##### after
 ```
 type coordinates('a) = ('a, 'a, 'a)
-
-/* apply the coordinates "type function" and return the type (int, int, int) */
-type intCoordinatesAlias = coordinates(int)
-
-let buddy: intCoordinatesAlias = (10, 20, 20)
-
-/* or, more commonly, write it inline */
-let buddy: coordinates(float) = (10.5, 20.5, 20.5)
 ```
-The leading apostrophe indicates that `'a` is a type variables: It accept any types. But the variable need to be same in all three fields of the tuple.
-
-In practice, types are inferred for you. So the more concise version of the above example would be nothing but:
-
-```ocaml
-let buddy = (10, 20, 20);
+now you can instantiate the `coordinates` type by giving its type argument
 ```
-The type system infers that it's a (int, int, int). Nothing else needed to be written down.
+let buddy: coordinates(int) = (10,20,30)
+```
 
 ### Boolean
 A boolean has the type bool and can be either true or false. Common operations:
@@ -234,7 +125,7 @@ A boolean has the type bool and can be either true or false. Common operations:
 `&&`: logical and
 `||`: logical or
 `!`: logical not.
-`<=`, `>=`, `<`, `>`
+`=<`, `>=`, `<`, `>`, '!='
 `==`: equal, compares data structures deeply: (1, 2) == (1, 2) is true.
 
 #### Bitwise operators
@@ -245,14 +136,7 @@ A boolean has the type bool and can be either true or false. Common operations:
 - `bsl` : Shift Left
 
 ### List
-
-Lists are:
-
-- homogeneous
-- immutable
-- fast at prepending items
-
-You'd use list for its resizability, its fast prepend (adding at the head), and its fast split, all of which are immutable yet efficient!
+A list is an ordered sequence of elements of the same type. Lists are fast at adding items (prepending), and splitting into two lists. They are not so fast at finding arbitrary items.
 
 **Syntax**
 ##### Building
@@ -274,13 +158,17 @@ e1::e2
     //a = [2,3,4,5,6]
     ```
     
-Lists, along with recursion, pattern-matching are used extensively in functional languages.
+Lists, along with recursion and pattern-matching are used extensively in functional languages.
 
 ##### Accessing
 Explained in 'pattern matching' section.
 
 ### Tuple
+Tuples are collections of disparate types. They are introduced in brackets, like this
+```
+let thirteens = (13, "thirteen", "dreizehn")
 
+```
 Tuples are
 - immutable
 - ordered
@@ -315,13 +203,8 @@ let (_, y, _) = my3dCoordinates /* now you've retrieved y */
 `_` is used in place of values which we do not want to retrieve/use.
 
 ### Record
-Records are like JavaScript objects but are
-
-- lighter
-- immutable by default
-- fixed in field names and types
-- very fast
-- a bit more rigidly typed
+[Source](https://reasonml.github.io/docs/en/record.html)
+Records are like 'C' structs, with named members.
 
 #### Usage
 ##### Building Record
@@ -360,8 +243,6 @@ without an explicit declaration somewhere above, the type system will give you a
 
 
 ### Map
-Note: maps will be implemented in the next release of Epoch
-
 Maps are key: value store mapping key of one type to value of one type.
 ```ocaml
 type accounts = map(string, address)
@@ -370,13 +251,16 @@ A value can be set using-
 ```ocaml
 accounts['some_string'] = some_address
 ```
-A value can be looked in a map using its key:
+A value can be looked up in a map using its key:
 ```
 accounts['some_string'] //will return some_address
 ```
 
 ### State
-Sophia does not have arbitrary mutable state, but only a limited form of state associated with each contract instance.
+
+A contract's state is enclosed within its `state` type. Nothing outside of this state will be persisted between contract invocations. 
+
+
 - Each contract defines a type state encapsulating its mutable state.
 ```ocaml
 type state = { contributions : map(address, int),
@@ -483,6 +367,7 @@ switch (x : int)
 
 ### Functions
 
+[Source](https://reasonml.github.io/docs/en/function.html)
 Function can be be of type: `public`, `internal` or `private`
 - public:  These can be used from outside the contract.
 - internal: These can be used by contracts inheriting the given contract.
@@ -502,7 +387,7 @@ private function addSquare(x:int, y:int) =
     sqX + sqY     //This is returned
 ```
 
-##### Annonymous function 
+##### Anonymous functions
 ```ocaml
 (x) => x + 1
 ```
@@ -565,7 +450,7 @@ The block-chain environment available to a contract is defined in three name spa
   calling the contract.
 - `Call.value` is the amount of coins transferred to the contract in the call.
 - `Call.gas_price` is the gas price of the current call.
-- `Call.gas_left` is the amount of gas left for the current call.
+- `Call.gas_left()` is the amount of gas left for the current call.
 - `Chain.get_balance(a : address)` returns the balance of account `a`.
 - `Chain.block_hash(h)` returns the hash of the block at height `h`.
 - `Chain.block_height` is the height of the current block (i.e. the block in which the current call will be included).
@@ -576,7 +461,7 @@ The block-chain environment available to a contract is defined in three name spa
 ---
 An example contract showing use of Contract primitives. (Come back to this after reading 'transactions' section)
 
-```javascript
+```ocaml
 contract Environment =
 
   // -- Information about the this contract ---
@@ -636,6 +521,8 @@ contract Environment =
 
 ### Events
 
+*Note: events are not currently implemented*
+
 An append only list of blockchain events (or log entries).
 Sophia contracts log structured messages to an event log in the resulting blockchain transaction. To use events a contract must declare a type event, and events are then logged using the event function:
 
@@ -669,38 +556,30 @@ contract addition =
 
 Sophia can generate blockchain transactions.
 
+### Contracts as objects, calling remotely and in
+Sophia's equivalent of modules is the static contract. Contracts take the place of classes in object-oriented languages, and support local state and will support inheritance (when this feature is implemented).
 
-#### Calling a contract function from outside of contract
-Public functions of deployed contracts can be called using `raw_call` function.
-This function is called in following manner-
+A contract's public API is the functions and types which are annotated with the `public` keyword. These can be used from outside the contract. All other functions and types are part of the internal API and can be used by contracts inheriting from this contract, except those annotated with `private`, which can only be used locally.
+
+#### Calling a function in another contract
+
+The public functions of deployed contracts can be called when you know the address of the contract. The type of the address is a contract. For instance given this abstract contract
+```ocaml
+// An abstract contract
+contract VotingType =
+  public stateful function vote : string => ()
 ```
-raw_call(contract_address: address, function_name: string, gas: int, value: int, args: `a)
+we can call it in the following manner
 ```
-The arguements are:
-- address: Address of the contract. 
-Type = `address`
-- function_name: Name of the function to be called. 
-Type = `string`
-- gas: Gas limit of the transaction. 
-Type = `int`
-- value: ?
-- args: The arguements thefunction takes. If only one, simply pass the value, if more than one, pass them as tuples. 
-Type = if one arguement, can be of any type, if more than one, of type `tuple`.
-
-An example: 
-```javascript
-//call a function "main(arg1)" of contract deployed at contract_address
-// with gas= 10000, value = 10
-contract RemoteCall =
-    function call(contract_address : address, arg1 : int) : int =
-        let gas   = 10000
-        let value = 10
-        raw_call(contract_address, "main", gas, value, arg1)
-
-    function call42(r : address) : int = call(r, 42)
- 
+  function voteTwice(v : VotingType, fee : int, alt : string) =
+    v.vote(value = fee, alt)
+    v.vote(value = fee, alt)
 ```
-
+To recover the underlying address of a contract instance there is a field address : address. For instance, to send tokens to the voting contract without calling it you can write
+```ocaml
+  function pay(v : VotingType, amount : int) =
+    Chain.spend(v.address, amount)
+```
 #### Sending tokens to an address
 Contracts can send/spend tokens using `raw_spend` call.
 The function is called in following manner:
@@ -729,6 +608,8 @@ type transaction = SpendTx(spend_tx)
 ## Functional Programming Concepts in Sophia
 
 ### Variants Types
+[Source](http://reasonmlhub.com/exploring-reasonml/ch_variants.html)
+[Source2](https://reasonml.github.io/docs/en/variant.html)
 Variants let you define sets of symbols. When used like this, they are similar to enums in C-style languages. For example, the following type color defines symbols for six colors.
 
 `type color = Red | Orange | Yellow | Green | Blue | Purple`
@@ -794,6 +675,7 @@ type option('a) = None | Some('a)
 This is the convention used to simulate a "nullable" (aka undefined or null) value in other languages. Thanks to this convenience type definition, Sophia can default every value to be non-nullable. An int will always be an int
 
 ### Destructuring
+[Source](https://reasonml.github.io/docs/en/destructuring.html)
 "Destructuring" is a visually concise way of extracting fields from a data structure. You can use destructuring anywhere you'd normally use a variable.
 
 Usage:
@@ -843,7 +725,9 @@ let otherFunction = (~person as {name} as thePerson) => {
 ```
 
 ### Pattern-matching
-It's like destructuring, but comes with even more help from the type system.
+[Source](http://reasonmlhub.com/exploring-reasonml/ch_pattern-matching.html)
+[Source 2](https://reasonml.github.io/docs/en/pattern-matching.html)
+Pattern matching is like destructuring, but comes with even more help from the type system.
 
 Consider a variant:
 ```ocaml
