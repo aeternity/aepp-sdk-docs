@@ -1025,12 +1025,15 @@ contract DutchAuction =
 
 ## Other resources
 
-You can find a good set of example Sophia contracts in the Epoch source tree, at https://github.com/aeternity/epoch/tree/master/apps/aesophia/test/contracts
+You can find a good set of example Sophia contracts in the Epoch source tree, in the [sophia example repository](https://github.com/aeternity/aepp-sophia-examples).
+
+For any question, support or issues use the [forum](https://forum.aeternity.com).
+
 
 
 ## Licenses
 
-Some parts were adopted from the Reasonml documentation (https://reasonml.github.io/docs/) released under the MIT license.
+Some parts were adopted from the [Reasonml documentation](https://reasonml.github.io/docs/) released under the MIT license.
 Everything else is released under the ISC license.
 
 ### The ISC License
