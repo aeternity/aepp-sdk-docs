@@ -1025,7 +1025,11 @@ contract DutchAuction =
 
 ## Other resources
 
-You can find a good set of example Sophia contracts in the Epoch source tree, at https://github.com/aeternity/epoch/tree/master/apps/aesophia/test/contracts
+You can find a good set of example Sophia contracts in the Epoch source tree, in the [sophia example repository](https://github.com/aeternity/aepp-sophia-examples).
+
+An online contract editor to use with testnet is available [here](https://contracts.aepps.com), also a local development environment can be create using the [ForgAE project](https://github.com/aeternity/aepp-forgae-js).
+
+For any question, support or issues use the [forum](https://forum.aeternity.com).
 
 
 ## Licenses
