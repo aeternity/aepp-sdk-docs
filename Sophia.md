@@ -1,4 +1,4 @@
-#Sophia Introduction and tutorial
+# Sophia Introduction and tutorial
 
 ## Intro
 Sophia is a new programming language which has been created for writing smart contracts which run on the æternity virtual machine and the ethereum virtual machine. It is in the same family as languages such as [reason](https://reasonml.github.io/), which makes it a functional language (on which more later).
