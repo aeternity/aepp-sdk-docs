@@ -20,14 +20,14 @@ As always, let's start by writing a Hello World contract, and compiling it.
 ### hello_world.aes
 ```
 contract MyContract =
-  public function hello_world () = "Hello World"
+  entrypoint hello_world () = "Hello World"
 
 ```
 ### the anatomy of the hello world contract
 - the contract starts with the keyword `contract`, followed by the name of the contract, in this case `MyContract`. 
 - contracts are similar to classes in OO programming, in the sense that they can be inherited from, and contain local state
 - the indentation of the next line indicates that it starts a new block
-- the `public` keyword before the `hello_world` indicates that it can be called from outside the contract
+- the `entrypoint` keyword before the `hello_world` indicates that it can be called from outside the contract
 - the `function` keyword starts the function definition, and the empty parantheses `()` that it takes no parameters
 - the return value of the function is always the literal `"Hello World"`
 
@@ -272,7 +272,7 @@ type state = { contributions : map(address, int),
 - The initial state of a contract is computed by the contract's init function. The init function is pure and returns the initial state as its return value. At contract creation time, the init function is executed and its result is stored as the contract state.
 
 ```ocaml
-public function init(beneficiary, deadline, goal) : state =
+entrypoint init(beneficiary, deadline, goal) : state =
     { contributions = Map.empty,
       beneficiary   = beneficiary,
       deadline      = deadline,
@@ -297,9 +297,9 @@ An example showing use of `state, init` and `put`
 contract Counter =
     type state = { value : int }
 
-    function init(val)       = { value = val }
-    function get()           = state.value
-    stateful function tick() = put(state{ value = state.value + 1 })
+    entrypoint init(val)       = { value = val }
+    entrypoint get()           = state.value
+    stateful entrypoint tick() = put(state{ value = state.value + 1 })
 ```
 ### Types not in Sophia
 - Arrays
@@ -368,8 +368,8 @@ switch (x : int)
 ### Functions
 
 [Source](https://reasonml.github.io/docs/en/function.html)
-Function can be be of type: `public`, `internal` or `private`
-- public:  These can be used from outside the contract.
+Function can be be of type: `entrypoint`, `internal` or `private`
+- entrypoint:  These can be used from outside the contract.
 - internal: These can be used by contracts inheriting the given contract.
 - private: These can only be used locally in the contract
 
@@ -945,29 +945,31 @@ Implementation of a Stack data structure using lists, recursion and state:
 ```javascript
 contract Stack =
 
-  type state = { stack : list(string),
+  record state = { stack : list(string),
                  size  : int }
 
-  function init(ss) = { stack = ss, size = length(ss) }
+  entrypoint init(ss) = { stack = ss, size = length(ss) }
 
   private function length(xs) =
     switch(xs)
       [] => 0
       _ :: xs => length(xs) + 1
 
-  stateful function pop() : string =
+  stateful entrypoint pop() : string =
     switch(state.stack)
       s :: ss =>
         put(state{ stack = ss, size = state.size - 1 })
         s
 
-  stateful function push(s) =
+  stateful entrypoint push(s) =
     put(state{ stack = s :: state.stack, size = state.size + 1 })
     state.size
 
   function all() = state.stack
 
   function size() = state.size
+  
+  
 
 ```
 ---
@@ -979,24 +981,22 @@ Implementation of a Dutch Auction
 //
 contract DutchAuction =
 
-  type state = { start_amount : int,
+  record state = { start_amount : int,
                  start_height : int,
                  dec          : int,
                  beneficiary  : address,
                  sold         : bool }
 
   // Add to work around current lack of predefined functions
-  private function abort(err) = abort(err)
-  private function spend(to, amount) =
+  //private function abort(err) = abort(err)
+  
+  private stateful function spend(to, amount) =
     let total = Contract.balance
-    raw_spend(to, amount)
+    Chain.spend(to, amount)
     total - amount
 
-  private function require(b : bool, err : string) =
-    if( !b ) abort(err)
-
   // TTL set by user on posting contract, typically (start - end ) div dec
-  public function init(beneficiary, start, decrease) : state =
+  entrypoint init(beneficiary, start, decrease) : state =
     require(start > 0 && decrease > 0, "bad args")
     { start_amount = start,
       start_height = Chain.block_height,
@@ -1007,7 +1007,7 @@ contract DutchAuction =
   // -- API
 
   // We are the buyer
-  public stateful function bid() =
+  stateful entrypoint bid() =
     require( !(state.sold), "sold")
     let cost =
       state.start_amount - (Chain.block_height - state.start_height) * state.dec
